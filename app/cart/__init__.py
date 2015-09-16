@@ -1,7 +1,8 @@
 """ @todo: Docstring """
 from satchless import cart as scart
 from prices import Price
-from product.models import Product
+
+from .models import Product
 
 
 class ShoppingCart(scart.Cart):
@@ -20,8 +21,12 @@ class ShoppingCart(scart.Cart):
             if product is None:
                 continue
             quantity = item.quantity
-            shoppingcart.add(product, quantity=quantity, check_quantity=False,
-                    skip_session_cart=True)
+            shoppingcart.add(
+                product,
+                quantity=quantity,
+                check_quantity=False,
+                skip_session_cart=True
+            )
         return shoppingcart
 
     def __str__(self):
@@ -30,10 +35,10 @@ class ShoppingCart(scart.Cart):
     def get_data_for_product(self, product):
         product_price = product.get_price_per_item()
         product_data = {
-                'product_slug': product.get_slug(),
-                'product_id': product.id_,
-                'unit_price_gross': str(product_price.gross),
-                'unit_price_net': str(product_price.net)}
+            'product_slug': product.get_slug(),
+            'product_id': product.id_,
+            'unit_price_gross': str(product_price.gross),
+            'unit_price_net': str(product_price.net)}
         return product_data
 
     def add(self, product, quantity=1, data=None, replace=False,
@@ -51,7 +56,6 @@ class ShoppingCart(scart.Cart):
 
 
 class SessionCartLine(scart.CartLine):
-
 
     def get_price_per_item(self, **kwargs):
         gross = self.data['unit_price_gross']
@@ -75,7 +79,6 @@ class SessionCartLine(scart.CartLine):
 
 
 class SessionCart(scart.Cart):
-
 
     def __str__(self):
         return 'SessionCart'
