@@ -1,3 +1,4 @@
+""" @todo: Docstring """
 from flask import Blueprint, render_template, abort
 
 cart = Blueprint('cart', __name__, url_prefix='/cart')
