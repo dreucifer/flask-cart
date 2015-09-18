@@ -4,4 +4,4 @@ from .models import db, Role, User
 
 
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
-security = Security()
+security = Security(datastore=user_datastore)

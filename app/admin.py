@@ -54,5 +54,8 @@ class RoleAdmin(AdminMixin, sqla.ModelView):
             else:
                 return redirect(url_for('security.login', next=request.url))
 
-admin = Admin(template_mode='bootstrap3', index_view=SecureAdminIndexView())
-
+admin = Admin(
+    base_template='my_master.html',
+    index_view=SecureAdminIndexView(),
+    template_mode='bootstrap3',
+)
